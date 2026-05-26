@@ -25,9 +25,7 @@
       --danger:   #f87171;
       --radius:   14px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html, body {
       height: 100%;
       background: var(--bg);
@@ -36,15 +34,12 @@
       font-size: 14px;
       -webkit-font-smoothing: antialiased;
     }
-
     body {
       display: flex;
       flex-direction: column;
       min-height: 100dvh;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
-
-    /* ── Animated mesh background ── */
     body::before {
       content: '';
       position: fixed;
@@ -55,7 +50,6 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .container {
       position: relative;
       z-index: 1;
@@ -67,313 +61,149 @@
       margin: 0 auto;
       width: 100%;
     }
-
-    /* ── Header ── */
     header {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 28px;
     }
-
     .logo {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      color: #fff;
+      font-weight: 800; font-size: 18px; color: #fff;
       flex-shrink: 0;
       box-shadow: 0 0 20px rgba(124,106,255,.35);
     }
+    h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.3px; }
+    h1 span { color: var(--accent2); }
 
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.3px;
-      color: var(--text);
-    }
-
-    h1 span {
-      color: var(--accent2);
-    }
-
-    /* ── Status banner ── */
     #status-banner {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-      font-size: 12.5px;
-      line-height: 1.4;
-      border: 1px solid transparent;
-      animation: slideIn .2s ease;
+      display: none; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: var(--radius);
+      margin-bottom: 16px; font-size: 12.5px; line-height: 1.4;
+      border: 1px solid transparent; animation: slideIn .2s ease;
     }
-
     #status-banner.show { display: flex; }
     #status-banner.info  { background: rgba(124,106,255,.12); border-color: rgba(124,106,255,.3); color: var(--accent2); }
     #status-banner.ok    { background: rgba(52,211,153,.1);  border-color: rgba(52,211,153,.3);  color: var(--success); }
     #status-banner.error { background: rgba(248,113,113,.1); border-color: rgba(248,113,113,.3); color: var(--danger); }
+    #status-banner.warn  { background: rgba(251,191,36,.08); border-color: rgba(251,191,36,.3);  color: var(--warn); }
+    @keyframes slideIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Form card ── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
     }
-
     .field { margin-bottom: 16px; }
     .field:last-child { margin-bottom: 0; }
-
     label {
-      display: block;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 7px;
+      display: block; font-size: 11px; font-weight: 500; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px;
     }
-
     input, textarea, select {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 11px 13px;
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      font-size: 13.5px;
-      line-height: 1.5;
-      transition: border-color .15s, box-shadow .15s;
-      -webkit-appearance: none;
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 9px; padding: 11px 13px; color: var(--text);
+      font-family: 'DM Mono', monospace; font-size: 13.5px; line-height: 1.5;
+      transition: border-color .15s, box-shadow .15s; -webkit-appearance: none;
     }
-
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(124,106,255,.18);
-    }
-
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,106,255,.18); }
     textarea { resize: vertical; min-height: 90px; }
 
-    /* tags row */
-    .tags-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
+    /* ── Fetch button row ── */
+    .fetch-row {
+      display: flex; gap: 8px; align-items: center; margin-top: 8px;
+    }
+    .btn-fetch {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(124,106,255,.15); border: 1px solid rgba(124,106,255,.35);
+      color: var(--accent2); border-radius: 8px; padding: 8px 14px;
+      font-family: 'DM Mono', monospace; font-size: 12px; cursor: pointer;
+      transition: background .15s; white-space: nowrap;
+    }
+    .btn-fetch:hover { background: rgba(124,106,255,.28); }
+    .btn-fetch:disabled { opacity: .4; cursor: not-allowed; }
+    .fetch-hint { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* fetch progress bar */
+    #fetch-bar {
+      display: none; height: 2px; background: var(--border);
+      border-radius: 2px; margin-bottom: 14px; overflow: hidden;
+    }
+    #fetch-bar.show { display: block; }
+    #fetch-bar-inner {
+      height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .4s ease; border-radius: 2px;
     }
 
+    .tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
     .tag-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(124,106,255,.15);
-      border: 1px solid rgba(124,106,255,.3);
-      color: var(--accent2);
-      border-radius: 6px;
-      padding: 3px 9px 3px 9px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background .15s;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(124,106,255,.15); border: 1px solid rgba(124,106,255,.3);
+      color: var(--accent2); border-radius: 6px; padding: 3px 9px;
+      font-size: 12px; cursor: pointer; transition: background .15s;
     }
-
     .tag-chip:hover { background: rgba(124,106,255,.28); }
     .tag-chip .x { font-size: 14px; line-height: 1; opacity: .7; }
 
-    /* ── Path display ── */
     .path-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(52,211,153,.07);
-      border: 1px solid rgba(52,211,153,.2);
-      border-radius: 8px;
-      padding: 9px 13px;
-      font-size: 12px;
-      color: var(--success);
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(52,211,153,.07); border: 1px solid rgba(52,211,153,.2);
+      border-radius: 8px; padding: 9px 13px; font-size: 12px; color: var(--success);
       margin-bottom: 14px;
     }
 
-    .path-pill svg { flex-shrink: 0; }
-
-    /* ── Preview ── */
-    #preview-block {
-      display: none;
-      margin-bottom: 14px;
-    }
-
+    #preview-block { display: none; margin-bottom: 14px; }
     #preview-block.show { display: block; }
-
-    .preview-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .preview-label {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
+    .preview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .preview-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     .copy-btn {
-      font-size: 11px;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 6px;
-      padding: 3px 9px;
-      cursor: pointer;
-      font-family: 'DM Mono', monospace;
-      transition: color .15s, border-color .15s;
+      font-size: 11px; background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px; padding: 3px 9px; cursor: pointer;
+      font-family: 'DM Mono', monospace; transition: color .15s, border-color .15s;
     }
-
     .copy-btn:hover { color: var(--text); border-color: var(--accent); }
-
     pre {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 14px;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      line-height: 1.6;
-      color: var(--muted);
-      white-space: pre-wrap;
-      word-break: break-all;
-      max-height: 200px;
-      overflow-y: auto;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
+      padding: 14px; font-family: 'DM Mono', monospace; font-size: 12px;
+      line-height: 1.6; color: var(--muted); white-space: pre-wrap;
+      word-break: break-all; max-height: 200px; overflow-y: auto;
     }
 
-    /* ── Buttons ── */
-    .btn-row {
-      display: flex;
-      gap: 10px;
-    }
-
+    .btn-row { display: flex; gap: 10px; }
     .btn {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      border-radius: var(--radius);
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      transition: transform .1s, box-shadow .15s, opacity .15s;
+      flex: 1; padding: 14px; border: none; border-radius: var(--radius);
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px;
+      cursor: pointer; transition: transform .1s, box-shadow .15s, opacity .15s;
       -webkit-tap-highlight-color: transparent;
     }
-
     .btn:active { transform: scale(.97); }
-
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(124,106,255,.4);
+      color: #fff; box-shadow: 0 4px 20px rgba(124,106,255,.4);
     }
-
     .btn-primary:hover { box-shadow: 0 6px 28px rgba(124,106,255,.55); }
     .btn-primary:disabled { opacity: .45; cursor: not-allowed; }
-
     .btn-secondary {
-      background: var(--surface);
-      color: var(--muted);
-      border: 1px solid var(--border);
+      background: var(--surface); color: var(--muted); border: 1px solid var(--border);
     }
-
     .btn-secondary:hover { color: var(--text); border-color: var(--accent); }
 
-    /* ── Instructions ── */
-    .instructions {
-      margin-top: 20px;
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-    }
-
-    .instructions h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 12px;
-    }
-
-    .step {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(124,106,255,.2);
-      color: var(--accent2);
-      font-size: 11px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .step-text {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
+    .instructions { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+    .instructions h2 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+    .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .step-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(124,106,255,.2); color: var(--accent2); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
     .step-text strong { color: var(--text); }
-    .step-text code {
-      background: rgba(124,106,255,.12);
-      color: var(--accent2);
-      border-radius: 4px;
-      padding: 1px 5px;
-      font-size: 12px;
-    }
+    .step-text code { background: rgba(124,106,255,.12); color: var(--accent2); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
 
-    /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-    /* ── Spinner ── */
-    .spinner {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid rgba(255,255,255,.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin .6s linear infinite;
-      vertical-align: middle;
-      margin-right: 6px;
-    }
-
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; margin-right: 6px; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
@@ -386,11 +216,10 @@
   </header>
 
   <div id="status-banner"></div>
+  <div id="fetch-bar"><div id="fetch-bar-inner"></div></div>
 
   <div class="path-pill">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-    </svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
     內部儲存空間/obsidian/Clippings/
   </div>
 
@@ -401,11 +230,18 @@
     </div>
     <div class="field">
       <label>網址</label>
-      <input type="url" id="f-url" placeholder="https://" />
+      <input type="url" id="f-url" placeholder="https://" oninput="onUrlChange()" />
     </div>
     <div class="field">
       <label>摘要 / 備註</label>
-      <textarea id="f-note" placeholder="重點摘要、想法、待辦…"></textarea>
+      <textarea id="f-note" placeholder="點下方按鈕自動抓取，或手動輸入重點…"></textarea>
+      <div class="fetch-row">
+        <button class="btn-fetch" id="fetch-btn" onclick="fetchContent()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+          自動抓取網頁摘要
+        </button>
+        <span class="fetch-hint" id="fetch-hint">抓取 meta description 與內文摘要</span>
+      </div>
     </div>
     <div class="field">
       <label>標籤</label>
@@ -413,9 +249,7 @@
         <input type="text" id="f-tag-input" placeholder="輸入後按 ＋" style="flex:1" />
         <button class="btn btn-secondary" id="add-tag-btn" style="flex:none;padding:11px 14px;border-radius:9px;font-size:16px">＋</button>
       </div>
-      <div class="tags-row" id="tags-row">
-        <span class="tag-chip" data-tag="clipping">#clipping <span class="x" onclick="removeTag(this)">×</span></span>
-      </div>
+      <div class="tags-row" id="tags-row"></div>
     </div>
   </div>
 
@@ -429,29 +263,14 @@
 
   <div class="btn-row">
     <button class="btn btn-secondary" onclick="togglePreview()">預覽</button>
-    <button class="btn btn-primary" id="clip-btn" onclick="sendToObsidian()">
-      存入 Obsidian
-    </button>
+    <button class="btn btn-primary" id="clip-btn" onclick="sendToObsidian()">存入 Obsidian</button>
   </div>
 
   <div class="instructions">
-    <h2>首次使用設定</h2>
+    <h2>Vault 設定</h2>
     <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">在 Chrome / Edge，點右上角選單 → <strong>「新增到主螢幕」</strong>，安裝為 PWA App</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">瀏覽任意網頁，點 <strong>分享</strong> → 選擇 <strong>Obsidian Clipper</strong></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">確認內容後點「存入 Obsidian」，系統會呼叫 Obsidian App 直接建立筆記</div>
-    </div>
-    <div class="step">
-      <div class="step-num">⚠</div>
-      <div class="step-text">首次跳轉 Obsidian 時請允許「開啟外部連結」。若 Vault 名稱不是 <code>obsidian</code>，請<strong>點此修改</strong>：
-        <br/><br/>
+      <div class="step-num">⚙</div>
+      <div class="step-text">Vault 名稱（預設 <code>obsidian</code>）：<br/><br/>
         <input type="text" id="vault-name" value="obsidian" style="width:100%;margin-top:4px" placeholder="Vault 資料夾名稱" oninput="saveVault()" />
       </div>
     </div>
@@ -460,140 +279,224 @@
 </div>
 
 <script>
-  // ── State ──
-  let tags = ['clipping'];
-  const $ = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
+let tags = ['clipping'];
 
-  // ── Load vault name ──
-  const savedVault = localStorage.getItem('vault') || 'obsidian';
-  $('vault-name').value = savedVault;
-  function saveVault() {
-    localStorage.setItem('vault', $('vault-name').value.trim() || 'obsidian');
+// ── Vault ──
+$('vault-name').value = localStorage.getItem('vault') || 'obsidian';
+function saveVault() { localStorage.setItem('vault', $('vault-name').value.trim() || 'obsidian'); }
+
+// ── Share Target ──
+function handleShareTarget() {
+  const p = new URLSearchParams(window.location.search);
+  const sharedTitle = p.get('title') || '';
+  const sharedUrl   = p.get('url')   || '';
+  const sharedText  = p.get('text')  || '';
+  if (sharedUrl || sharedTitle) {
+    $('f-title').value = sharedTitle || extractDomain(sharedUrl);
+    $('f-url').value   = sharedUrl;
+    if (sharedText && sharedText !== sharedUrl) $('f-note').value = sharedText;
+    showStatus('已接收分享內容 — 可點「自動抓取網頁摘要」補充內文', 'info');
+    history.replaceState({}, '', '/obsidian-clipper/');
   }
+}
 
-  // ── Handle Share Target (Web Share Target API) ──
-  // When app is opened via Share Sheet, URL params carry the data
-  function handleShareTarget() {
-    const params = new URLSearchParams(window.location.search);
-    const sharedTitle = params.get('title') || '';
-    const sharedUrl   = params.get('url')   || '';
-    const sharedText  = params.get('text')  || '';
+function extractDomain(url) {
+  try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
+}
 
-    if (sharedUrl || sharedTitle) {
-      $('f-title').value = sharedTitle || extractDomain(sharedUrl);
-      $('f-url').value   = sharedUrl;
-      if (sharedText && sharedText !== sharedUrl) {
-        $('f-note').value = sharedText;
-      }
-      showStatus('已接收分享內容，請確認後存入', 'info');
-      // Clean URL to avoid re-triggering on reload
-      history.replaceState({}, '', '/');
+function onUrlChange() {
+  // reset fetch hint when URL changes
+  $('fetch-hint').textContent = '抓取 meta description 與內文摘要';
+}
+
+// ── Fetch content via allorigins proxy ──
+async function fetchContent() {
+  const url = $('f-url').value.trim();
+  if (!url) { showStatus('請先輸入網址', 'warn'); return; }
+
+  const btn = $('fetch-btn');
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner" style="border-top-color:var(--accent2)"></span>抓取中…`;
+  setProgress(10);
+  $('fetch-hint').textContent = '連線中…';
+
+  try {
+    // allorigins is a free CORS proxy — returns page HTML
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+    setProgress(30);
+
+    const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
+    setProgress(60);
+
+    if (!res.ok) throw new Error('proxy error ' + res.status);
+    const data = await res.json();
+    const html = data.contents || '';
+    setProgress(85);
+
+    const result = parseContent(html, url);
+    setProgress(100);
+
+    if (result.note) {
+      $('f-note').value = result.note;
+      if (!$('f-title').value && result.title) $('f-title').value = result.title;
+      $('fetch-hint').textContent = `✓ 已抓到 ${result.source}`;
+      showStatus('摘要抓取成功，請確認內容', 'ok');
+    } else {
+      $('fetch-hint').textContent = '此網站無法抓取（CORS 限制）';
+      showStatus('無法取得內文，請手動填寫備註', 'warn');
+    }
+  } catch (err) {
+    const msg = err.name === 'TimeoutError' ? '連線逾時（12s）' : '抓取失敗：' + err.message;
+    $('fetch-hint').textContent = msg;
+    showStatus(msg + '，請手動填寫', 'warn');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>重新抓取`;
+    setTimeout(() => setProgress(0), 800);
+  }
+}
+
+function setProgress(pct) {
+  const bar = $('fetch-bar');
+  bar.classList.toggle('show', pct > 0 && pct < 100);
+  $('fetch-bar-inner').style.width = pct + '%';
+  if (pct >= 100) setTimeout(() => bar.classList.remove('show'), 600);
+}
+
+function parseContent(html, pageUrl) {
+  // Use DOMParser to parse HTML safely
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Title
+  const title = (
+    doc.querySelector('meta[property="og:title"]')?.getAttribute('content') ||
+    doc.querySelector('title')?.textContent ||
+    ''
+  ).trim();
+
+  // 1. og:description or meta description
+  const metaDesc = (
+    doc.querySelector('meta[property="og:description"]')?.getAttribute('content') ||
+    doc.querySelector('meta[name="description"]')?.getAttribute('content') ||
+    ''
+  ).trim();
+
+  // 2. Article body — try common selectors
+  const bodySelectors = [
+    'article', '[role="main"]', 'main',
+    '.article-body', '.post-content', '.entry-content',
+    '.content', '#content', '.story-body'
+  ];
+  let bodyText = '';
+  for (const sel of bodySelectors) {
+    const el = doc.querySelector(sel);
+    if (el) {
+      // Remove nav, ads, scripts
+      el.querySelectorAll('nav,aside,script,style,figure,iframe,.ad,.ads').forEach(n => n.remove());
+      const raw = el.innerText || el.textContent || '';
+      bodyText = raw.replace(/\s+/g, ' ').trim();
+      if (bodyText.length > 100) break;
     }
   }
 
-  function extractDomain(url) {
-    try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
+  // Build note
+  let note = '';
+  let source = '';
+
+  if (metaDesc) {
+    note += metaDesc;
+    source = 'meta description';
   }
 
-  // ── Tags ──
-  function renderTags() {
-    const row = $('tags-row');
-    row.innerHTML = tags.map(t =>
-      `<span class="tag-chip" data-tag="${t}">#${t} <span class="x" onclick="removeTag(this)">×</span></span>`
-    ).join('');
-  }
-
-  function removeTag(el) {
-    const tag = el.parentElement.dataset.tag;
-    tags = tags.filter(t => t !== tag);
-    renderTags();
-  }
-
-  $('add-tag-btn').onclick = () => {
-    const val = $('f-tag-input').value.trim().replace(/^#/, '').replace(/\s+/g, '-');
-    if (val && !tags.includes(val)) { tags.push(val); renderTags(); }
-    $('f-tag-input').value = '';
-  };
-
-  $('f-tag-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); $('add-tag-btn').click(); }
-  });
-
-  // ── Build Markdown ──
-  function buildMd() {
-    const title = $('f-title').value.trim() || '（無標題）';
-    const url   = $('f-url').value.trim();
-    const note  = $('f-note').value.trim();
-    const date  = new Date().toISOString().slice(0, 10);
-    const tagStr = tags.map(t => `"${t}"`).join(', ');
-
-    let md = `---\ntitle: "${title.replace(/"/g, '\\"')}"\nurl: ${url || '(無)'}\ndate: ${date}\ntags: [${tagStr}]\nsource: web-clipper\n---\n\n# ${title}\n`;
-    if (note) md += `\n> ${note.replace(/\n/g, '\n> ')}\n`;
-    if (url) md += `\n---\n[原始來源](${url})\n`;
-    return md;
-  }
-
-  // ── Preview ──
-  let previewOpen = false;
-  function togglePreview() {
-    previewOpen = !previewOpen;
-    $('md-preview').textContent = buildMd();
-    $('preview-block').classList.toggle('show', previewOpen);
-  }
-
-  function copyMd() {
-    navigator.clipboard.writeText(buildMd()).then(() => showStatus('已複製 Markdown！', 'ok'));
-  }
-
-  // ── Send to Obsidian via URI ──
-  function sendToObsidian() {
-    const title   = $('f-title').value.trim() || '剪藏_' + new Date().toISOString().slice(0,10);
-    const vault   = $('vault-name').value.trim() || 'obsidian';
-    const content = buildMd();
-
-    // Sanitize filename
-    const filename = title.replace(/[\\/:*?"<>|]/g, '_').slice(0, 80);
-
-    // Build Obsidian URI
-    // obsidian://new?vault=NAME&file=PATH&content=CONTENT
-    const uri = `obsidian://new?` +
-      `vault=${encodeURIComponent(vault)}` +
-      `&file=${encodeURIComponent('Clippings/' + filename)}` +
-      `&content=${encodeURIComponent(content)}`;
-
-    const btn = $('clip-btn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>開啟 Obsidian…';
-
-    // Trigger URI scheme
-    window.location.href = uri;
-
-    // Reset button after delay
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = '存入 Obsidian';
-      showStatus('✓ 已傳送至 Obsidian，請確認 App 已開啟', 'ok');
-    }, 2500);
-  }
-
-  // ── Status ──
-  function showStatus(msg, type = 'info') {
-    const el = $('status-banner');
-    el.textContent = msg;
-    el.className = `show ${type}`;
-    if (type !== 'info') {
-      setTimeout(() => el.classList.remove('show'), 4000);
+  if (bodyText && bodyText.length > 80) {
+    // Take first ~400 chars of body as excerpt
+    const excerpt = bodyText.slice(0, 400).replace(/(.{1,80})\s/g, '$1\n').trim();
+    if (metaDesc) {
+      note += '\n\n### 內文摘錄\n' + excerpt + (bodyText.length > 400 ? '…' : '');
+    } else {
+      note = excerpt + (bodyText.length > 400 ? '…' : '');
     }
+    source = metaDesc ? 'meta + 內文' : '內文';
   }
 
-  // ── Service Worker ──
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  }
+  return { title, note, source: source || '' };
+}
 
-  // ── Init ──
-  handleShareTarget();
+// ── Tags ──
+function renderTags() {
+  $('tags-row').innerHTML = tags.map(t =>
+    `<span class="tag-chip" data-tag="${t}">#${t} <span class="x" onclick="removeTag(this)">×</span></span>`
+  ).join('');
+}
+function removeTag(el) {
+  tags = tags.filter(t => t !== el.parentElement.dataset.tag);
   renderTags();
+}
+$('add-tag-btn').onclick = () => {
+  const val = $('f-tag-input').value.trim().replace(/^#/, '').replace(/\s+/g, '-');
+  if (val && !tags.includes(val)) { tags.push(val); renderTags(); }
+  $('f-tag-input').value = '';
+};
+$('f-tag-input').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('add-tag-btn').click(); } });
+
+// ── Markdown ──
+function buildMd() {
+  const title  = $('f-title').value.trim() || '（無標題）';
+  const url    = $('f-url').value.trim();
+  const note   = $('f-note').value.trim();
+  const date   = new Date().toISOString().slice(0, 10);
+  const tagStr = tags.map(t => `"${t}"`).join(', ');
+  let md = `---\ntitle: "${title.replace(/"/g, '\\"')}"\nurl: ${url || '(無)'}\ndate: ${date}\ntags: [${tagStr}]\nsource: web-clipper\n---\n\n# ${title}\n`;
+  if (note) md += `\n> ${note.replace(/\n/g, '\n> ')}\n`;
+  if (url) md += `\n---\n[原始來源](${url})\n`;
+  return md;
+}
+
+// ── Preview ──
+let previewOpen = false;
+function togglePreview() {
+  previewOpen = !previewOpen;
+  $('md-preview').textContent = buildMd();
+  $('preview-block').classList.toggle('show', previewOpen);
+}
+function copyMd() {
+  navigator.clipboard.writeText(buildMd()).then(() => showStatus('已複製 Markdown！', 'ok'));
+}
+
+// ── Send to Obsidian ──
+function sendToObsidian() {
+  const title    = $('f-title').value.trim() || '剪藏_' + new Date().toISOString().slice(0,10);
+  const vault    = $('vault-name').value.trim() || 'obsidian';
+  const content  = buildMd();
+  const filename = title.replace(/[\\/:*?"<>|]/g, '_').slice(0, 80);
+  const uri = `obsidian://new?vault=${encodeURIComponent(vault)}&file=${encodeURIComponent('Clippings/' + filename)}&content=${encodeURIComponent(content)}`;
+  const btn = $('clip-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>開啟 Obsidian…';
+  window.location.href = uri;
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = '存入 Obsidian';
+    showStatus('✓ 已傳送至 Obsidian', 'ok');
+  }, 2500);
+}
+
+// ── Status ──
+function showStatus(msg, type = 'info') {
+  const el = $('status-banner');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  if (type !== 'info') setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+// ── SW ──
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+
+// ── Init ──
+handleShareTarget();
+renderTags();
 </script>
 </body>
 </html>

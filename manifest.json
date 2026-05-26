@@ -2,7 +2,8 @@
   "name": "Obsidian Clipper",
   "short_name": "OB Clipper",
   "description": "快速將網頁剪藏為 Obsidian Markdown 筆記",
-  "start_url": "/",
+  "start_url": "/obsidian-clipper/",
+  "scope": "/obsidian-clipper/",
   "display": "standalone",
   "background_color": "#0d0d0f",
   "theme_color": "#0d0d0f",
@@ -22,7 +23,7 @@
     }
   ],
   "share_target": {
-    "action": "/",
+    "action": "/obsidian-clipper/",
     "method": "GET",
     "params": {
       "title": "title",

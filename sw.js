@@ -1,5 +1,9 @@
 const CACHE = 'ob-clipper-v1';
-const ASSETS = ['/', '/index.html', '/manifest.json'];
+const ASSETS = [
+  '/obsidian-clipper/',
+  '/obsidian-clipper/index.html',
+  '/obsidian-clipper/manifest.json'
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -16,10 +20,9 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Share target GET requests — let through to page
   const url = new URL(e.request.url);
   if (url.searchParams.has('url') || url.searchParams.has('title')) {
-    return; // don't intercept share target navigations
+    return;
   }
 
   e.respondWith(

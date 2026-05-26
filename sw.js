@@ -1,4 +1,4 @@
-const CACHE = 'ob-clipper-v1';
+const CACHE = 'ob-clipper-v2';  // v1 改成 v2
 const ASSETS = [
   '/obsidian-clipper/',
   '/obsidian-clipper/index.html',
